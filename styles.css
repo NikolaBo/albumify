@@ -1,5 +1,6 @@
 body {
   background-image: url('img/background1.jpeg');
+  /* Photo by <a href="https://unsplash.com/@kevinianeselli?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kevin Ianeselli</a> on <a href="https://unsplash.com/s/photos/sunset?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -57,12 +58,14 @@ div {
 
 #filled {
   border-color: white;
+  background-color: white;
   border-radius: 5px 0px 0px 5px;
   width: 100px;
 }
 
 #empty {
   border-color: lightslategray;
+  background-color: lightslategray;
   border-radius: 0px 5px 5px 0px;
   width: 300px;
 }
@@ -127,6 +130,7 @@ div {
 .bar {
   width: 8px;
   border: solid 4px white;
+  background-color: white;
 }
 
 
