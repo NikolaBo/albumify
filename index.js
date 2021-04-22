@@ -101,20 +101,17 @@
   function updateText(event) {
     let inputId = event.target.id;
     let toUpdate;
-    switch (inputId) {
-      case "song":
-        toUpdate = "song-name";
-        break;
-      case "artist":
-        toUpdate = "artist-name"
-        break;
+    if (inputId === "song") {
+      toUpdate = "song-name";
+    } else {
+      toUpdate = "artist-name";
     }
     id(toUpdate).textContent = event.target.value;
   }
 
   /**
    * Callback when HTML body clicked
-   * @param event - information about click event
+   * @param {event} event - information about click event
    */
   function backgroundClicked(event) {
     if (event.target.closest(".menu-item") === null) {
@@ -152,14 +149,11 @@
     return document.getElementById(idValue);
   }
 
-  /**
-   * Qs shorthand
-   * @param {string} selector - selector to find
-   * @returns element
-   */
+  /*
   function qs(selector) {
     return document.querySelector(selector);
   }
+  */
 
   /**
    * Qsa shorthand
