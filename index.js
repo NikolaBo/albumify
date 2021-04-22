@@ -32,9 +32,20 @@
     "song",
     "artist",
     "toggle-play",
-    "next-bg"
+    "next-bg",
+    "upload-bg"
   ];
 
+  // Functions to generate the possible customization menu pages
+  const generators = [
+    () => generateInput(pageIds[0], "Song Name:", updateText),
+    () => generateInput(pageIds[1], "Artist Name:", updateText),
+    () => generateButton(() => toggleSelector("#play-controls"), "Toggle Play Controls"),
+    () => generateButton(nextBackground, "Next Background"),
+    () => generateFileInput("Upload Background", setCustomImage)
+  ];
+
+  // Default backgrouns
   const backgroundImages = [
     "img/background1.jpeg",   // Photo by Kevin Ianeselli on Unsplash
     "img/background2.jpeg",   // Photo by Joshua Fuller on Unsplash
@@ -42,14 +53,6 @@
     "img/background4.jpeg",   // Photo by NASA on Unsplash
     "img/background5.jpeg"    // Photo by Gabriel on Unsplash
   ]
-
-  // Functions to generate the possible customization menu pages
-  const generators = [
-    () => generateInput(pageIds[0], "Song Name:", updateText),
-    () => generateInput(pageIds[1], "Artist Name:", updateText),
-    () => generateButton(() => toggleSelector("#play-controls"), "Toggle Play Controls"),
-    () => generateButton(nextBackground, "Next Background")
-  ];
 
   /**
    * Initializes page/sets up event listeners
@@ -119,6 +122,34 @@
   }
 
   /**
+   * Generates a file input
+   * @param {string} labelText - what to label it
+   * @param {Function} callback - the callback function
+   */
+   function generateFileInput(labelText, callback) {
+    const menuPage = id("menu-page");
+    // Set up label
+    let label = document.createElement("label");
+    label.id = "file-label";
+    label.textContent = labelText;
+    // Set up input inside label
+    let input = document.createElement("input");
+    input.type = "file";
+    input.addEventListener("change", callback);
+
+    label.appendChild(input);
+    menuPage.appendChild(label);
+  }
+
+  function setCustomImage() {
+    if (this.files && this.files[0]) {
+      const src = URL.createObjectURL(this.files[0]); // set src to blob url
+      const prop = "url('" + src + "')";
+      document.body.style.backgroundImage = prop;
+    }
+  }
+
+  /**
    * Generates a menu button
    * @param {Function} buttonCallback - the callback function
    * @param {string} text - the button text
@@ -161,7 +192,6 @@
    */
   function toggleSelector(s) {
     const elements = qsa(s);
-    console.log(elements);
     for (let i = 0; i < elements.length; i++) {
       elements[i].classList.toggle("hidden");
     }

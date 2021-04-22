@@ -33,18 +33,24 @@ header {
   display: none !important;
 }
 
-button, input, footer article {
+#file-label {
+  display: inline-block;
+  line-height: 5vh;
+  padding: 0 1vh;
+}
+
+#file-label, button, input, footer article {
   background-color: #d5d5d56d;
 }
 
-button, input {
+#file-label, button, input {
   margin: 0.5vh;
   opacity: 80%;
   border: none;
   height: 5vh;
 }
 
-input, button:not(.scale) {
+#file-label, input, button:not(.scale) {
   vertical-align: bottom;
 }
 
@@ -67,11 +73,11 @@ button {
   font-family: 'Roboto', sans-serif;
 }
 
-button.scale:hover {
+button:hover {
   background-color: #d5d5d5;
 }
 
-button.scale:active {
+button:active {
   background-color: #9b9b9b;
 }
 
@@ -90,6 +96,10 @@ button.scale:active {
 h1, p, label, input, button:not(.scale) {
   font-family: 'Ubuntu', sans-serif;
   color: white;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 h1 {
