@@ -6,10 +6,9 @@
   design (using some border tricks)
 */
 
-
 body {
   background-image: url('img/background1.jpeg');
-  /* Photo by <a href="https://unsplash.com/@kevinianeselli?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kevin Ianeselli</a> on <a href="https://unsplash.com/s/photos/sunset?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
+  /* Photo by Kevin Ianeselli on Unsplash*/
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -86,11 +85,8 @@ button.scale:active {
   padding: 0rem 0.625rem;
 }
 
-h1, p, input, label {
-  font-family: 'Ubuntu', sans-serif;
-}
-
 h1, p, label, input {
+  font-family: 'Ubuntu', sans-serif;
   color: white;
 }
 
@@ -153,8 +149,15 @@ p {
 #play {
   height: 3.12rem;
   width: 3.12rem;
-  clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 25%, 75% 50%,
-                      33% 75%, 33% 100%, 100% 100%, 100% 0%);
+  clip-path: polygon(0% 0%,
+                    0% 100%,
+                    33% 100%,
+                    33% 25%,
+                    75% 50%,
+                    33% 75%,
+                    33% 100%,
+                    100% 100%,
+                    100% 0%);
 }
 
 #play-controls {
