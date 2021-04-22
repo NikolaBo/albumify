@@ -14,6 +14,10 @@
 (function() {
   window.addEventListener("load", init);
 
+  // Constants to for scaling
+  const INCREMENT = 0.1;
+  const DECREMENT = -0.1;
+
   // Global variable needed to scale design proportionally
   let initialFontSize;
 
@@ -49,8 +53,12 @@
     const html = document.documentElement;
     initialFontSize = window.getComputedStyle(html).getPropertyValue('font-size');
     initialFontSize = parseFloat(initialFontSize);
-    id("grow").addEventListener("click", function() { scale(0.1); });
-    id("shrink").addEventListener("click", function() { scale(-0.1); });
+    id("grow").addEventListener("click", function() {
+      scale(INCREMENT);
+    });
+    id("shrink").addEventListener("click", function() {
+      scale(DECREMENT);
+    });
   }
 
   /**
@@ -88,7 +96,7 @@
 
   /**
    * Updates text corresponding to given input
-   * @param  event - information about input event
+   * @param {event} event - information about input event
    */
   function updateText(event) {
     let inputId = event.target.id;
@@ -119,7 +127,6 @@
    */
   function toggleMenu() {
     const menu = qsa(".menu-item");
-    console.log(menu);
     for (let i = 0; i < menu.length; i++) {
       menu[i].classList.toggle("hidden");
     }
@@ -127,7 +134,7 @@
 
   /**
    *  Shifts rem based design by changing root font size
-   * @param {number} percentChange
+   * @param {number} percentChange - how much to scale by
    */
   function scale(percentChange) {
     const html = document.documentElement;
@@ -136,14 +143,29 @@
     html.style.fontSize = fontSize + percentChange * initialFontSize + "px";
   }
 
+  /**
+   * Id shorthand
+   * @param {string} idValue - id to find
+   * @returns element
+   */
   function id(idValue) {
     return document.getElementById(idValue);
   }
 
+  /**
+   * Qs shorthand
+   * @param {string} selector - selector to find
+   * @returns element
+   */
   function qs(selector) {
     return document.querySelector(selector);
   }
 
+  /**
+   * Qsa shorthand
+   * @param {string} selector - selector to find
+   * @returns element
+   */
   function qsa(selector) {
     return document.querySelectorAll(selector);
   }
