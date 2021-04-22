@@ -8,7 +8,7 @@
 
 body {
   background-image: url('img/background1.jpeg');
-  /* Photo by Kevin Ianeselli on Unsplash*/
+  /* Photo by Kevin Ianeselli on Unsplash */
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -149,15 +149,18 @@ p {
 #play {
   height: 3.12rem;
   width: 3.12rem;
-  clip-path: polygon(0% 0%,
-                    0% 100%,
-                    33% 100%,
-                    33% 25%,
-                    75% 50%,
-                    33% 75%,
-                    33% 100%,
-                    100% 100%,
-                    100% 0%);
+  clip-path:
+  polygon(
+  0% 0%,
+  0% 100%,
+  33% 100%,
+  33% 25%,
+  75% 50%,
+  33% 75%,
+  33% 100%,
+  100% 100%,
+  100% 0%
+  );
 }
 
 #play-controls {
