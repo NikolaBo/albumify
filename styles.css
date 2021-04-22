@@ -8,7 +8,6 @@
 
 body {
   background-image: url('img/background1.jpeg');
-  /* Photo by Kevin Ianeselli on Unsplash */
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -31,10 +30,10 @@ header {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-button.scale, input, footer article {
+button, input, footer article {
   background-color: #d5d5d56d;
 }
 
@@ -45,24 +44,27 @@ button, input {
   height: 5vh;
 }
 
-input {
-  width: 20vh;
-  box-sizing: border-box;
+input, button:not(.scale) {
   vertical-align: bottom;
 }
 
-input, label {
+input {
+  width: 20vh;
+  box-sizing: border-box;
+}
+
+input, label, button:not(.scale) {
   font-size: 2vh;
+}
+
+button.scale {
+  font-weight: 900;
+  font-size: 3vh;
+  width: 5vh;
 }
 
 button {
   font-family: 'Roboto', sans-serif;
-  font-weight: 900;
-  font-size: 3vh;
-}
-
-button.scale {
-  width: 5vh;
 }
 
 button.scale:hover {
@@ -85,7 +87,7 @@ button.scale:active {
   padding: 0rem 0.625rem;
 }
 
-h1, p, label, input {
+h1, p, label, input, button:not(.scale) {
   font-family: 'Ubuntu', sans-serif;
   color: white;
 }

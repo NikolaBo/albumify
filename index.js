@@ -24,16 +24,31 @@
   // Counter needed to keep track of current customization menu page
   let currentPage = 0;
 
+  // Counter needed to keep track of current background image
+  let currentBackground = 0;
+
   // Ids of the possible customization menu pages
   const pageIds = [
     "song",
-    "artist"
+    "artist",
+    "toggle-play",
+    "next-bg"
   ];
+
+  const backgroundImages = [
+    "img/background1.jpeg",   // Photo by Kevin Ianeselli on Unsplash
+    "img/background2.jpeg",   // Photo by Joshua Fuller on Unsplash
+    "img/background3.jpeg",   // Photo by Agnaldo Andrella on Unsplash
+    "img/background4.jpeg",   // Photo by NASA on Unsplash
+    "img/background5.jpeg"    // Photo by Gabriel on Unsplash
+  ]
 
   // Functions to generate the possible customization menu pages
   const generators = [
-    () => generateInput(pageIds[0]),
-    () => generateInput(pageIds[1])
+    () => generateInput(pageIds[0], "Song Name:", updateText),
+    () => generateInput(pageIds[1], "Artist Name:", updateText),
+    () => generateButton(() => toggleSelector("#play-controls"), "Toggle Play Controls"),
+    () => generateButton(nextBackground, "Next Background")
   ];
 
   /**
@@ -43,7 +58,7 @@
     setUpScaling();
     document.body.addEventListener("click", backgroundClicked);
     id("page-btn").addEventListener("click", nextPage);
-    generateInput(pageIds[0]);
+    generators[0]();
   }
 
   /**
@@ -74,24 +89,46 @@
   }
 
   /**
-   * Generates one of the two possible menu inputs
-   * @param {string} inputId - the id to give generated input
+   * Goes to next background image
    */
-  function generateInput(inputId) {
-    const menuPage = id("menu-page");
+   function nextBackground() {
+      currentBackground = (currentBackground + 1) % backgroundImages.length;
+      const prop = "url('" + backgroundImages[currentBackground] + "')";
+      document.body.style.backgroundImage = prop;
+    }
 
+  /**
+   * Generates a menu input
+   * @param {string} inputId - the id to give generated input
+   * @param {string} labelText - what to label it
+   * @param {Function} callback - the callback function
+   */
+  function generateInput(inputId, labelText, callback) {
+    const menuPage = id("menu-page");
     // Set up label
     let label = document.createElement("label");
     label.setAttribute("for", inputId);
-    let content = inputId.charAt(0).toUpperCase() + inputId.slice(1) + " Name:";
-    label.textContent = content;
+    label.textContent = labelText;
     menuPage.appendChild(label);
 
     // Set up input
     let input = document.createElement("input");
     input.id = inputId;
-    input.addEventListener("input", updateText);
+    input.addEventListener("input", callback);
     menuPage.appendChild(input);
+  }
+
+  /**
+   * Generates a menu button
+   * @param {Function} buttonCallback - the callback function
+   * @param {string} text - the button text
+   */
+   function generateButton(buttonCallback, text) {
+    const menuPage = id("menu-page");
+    let button = document.createElement("button");
+    button.textContent = text;
+    button.addEventListener("click", buttonCallback);
+    menuPage.appendChild(button);
   }
 
   /**
@@ -115,17 +152,18 @@
    */
   function backgroundClicked(event) {
     if (event.target.closest(".menu-item") === null) {
-      toggleMenu();
+      toggleSelector(".menu-item");
     }
   }
 
   /**
    * Show/hide menu items
    */
-  function toggleMenu() {
-    const menu = qsa(".menu-item");
-    for (let i = 0; i < menu.length; i++) {
-      menu[i].classList.toggle("hidden");
+  function toggleSelector(s) {
+    const elements = qsa(s);
+    console.log(elements);
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].classList.toggle("hidden");
     }
   }
 
