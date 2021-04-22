@@ -12,6 +12,7 @@
 "use strict";
 
 (function() {
+
   window.addEventListener("load", init);
 
   // Constants to for scaling
@@ -41,7 +42,8 @@
     "current",
     "toggle-play",
     "next-bg",
-    "upload-bg"
+    "upload-bg",
+    "save"
   ];
 
   // Functions to generate the possible customization menu pages
@@ -52,7 +54,8 @@
     () => generateInput(pageIds[3], "Current (Seconds):", setTime),
     () => generateButton(() => toggleSelector("#play-controls"), "Toggle Play Controls"),
     () => generateButton(nextBackground, "Next Background"),
-    () => generateFileInput("Upload Background", setCustomImage)
+    () => generateFileInput("Upload Background", setCustomImage),
+    () => generateButton(saveImage, "Save Image")
   ];
 
   // Default backgrounds
@@ -103,12 +106,21 @@
 
   /**
    * Goes to next background image
-   */
-   function nextBackground() {
-      currentBackground = (currentBackground + 1) % backgroundImages.length;
-      const prop = "url('" + backgroundImages[currentBackground] + "')";
-      document.body.style.backgroundImage = prop;
-    }
+  */
+  function nextBackground() {
+    currentBackground = (currentBackground + 1) % backgroundImages.length;
+    const prop = "url('" + backgroundImages[currentBackground] + "')";
+    document.body.style.backgroundImage = prop;
+  }
+
+  function saveImage() {
+    toggleSelector(".menu-item");
+    domtoimage.toBlob(document.body)
+    .then(function (blob) {
+        console.log(blob);
+        saveAs(URL.createObjectURL(blob), "albumify");
+    });
+  }
 
   /**
    * Generates a menu input
