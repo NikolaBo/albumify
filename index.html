@@ -1,3 +1,11 @@
+<!--
+  Name: Nikola Bojanic
+  Date: April 21, 2021
+  Section: CSE 154 AF
+  This is a page with a album player design created through CSS, that you can
+  customize through interactive JS.
+-->
+
 <!doctype html>
 
 <html lang="en">
@@ -10,24 +18,38 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="index.js"></script>
   </head>
 
   <body>
-    <section id="album-cover"></section>
-    <section id="controls">
-      <h1>Dear April</h1>
-      <p>Frank Ocean</p>
-      <div>
-        <hr id="filled"><span class="dot"></span><hr id="empty">
-      </div>
-      <sub>0:53<span id="end">3:51</span></sub>
-      <section id="play-controls">
-        <section class="skip"><section class="bar"></section><section id="triangle-l"></section></section>
-        <span id="play"></span>
-        <section class="skip"><section id="triangle-r"></section><section class="bar"></section></section>
+    <header>
+      <span class="menu-item">
+        <button class="scale" id="grow">+</button>
+        <button class="scale" id="shrink">-</button>
+      </span>
+      <span class="menu-item" id="customization">
+        <span id="menu-page">
+        </span>
+        <button id="page-btn" class="scale">></button>
+      </span>
+    </header>
+    <main>
+      <div id="album-cover"></div>
+      <section id="controls">
+        <h1 id="song-name">Dear April</h1>
+        <p id="artist-name">Frank Ocean</p>
+        <div id="seeking-bar">
+          <hr id="filled"><span class="dot"></span><hr id="empty">
+        </div>
+        <p id="time">0:53<span id="end">3:51</span></p>
+        <section id="play-controls">
+          <div class="skip"><div class="bar"></div><div id="triangle-l"></div></div>
+          <span id="play"></span>
+          <div class="skip"><div id="triangle-r"></div><div class="bar"></div></div>
+        </section>
       </section>
-    </section>
+    </main>
   </body>
 </html>
