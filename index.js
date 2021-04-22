@@ -143,22 +143,16 @@
   /**
    * Id shorthand
    * @param {string} idValue - id to find
-   * @returns element
+   * @returns {Element} element
    */
   function id(idValue) {
     return document.getElementById(idValue);
   }
 
-  /*
-  function qs(selector) {
-    return document.querySelector(selector);
-  }
-  */
-
   /**
    * Qsa shorthand
    * @param {string} selector - selector to find
-   * @returns element
+   * @returns {Element} element
    */
   function qsa(selector) {
     return document.querySelectorAll(selector);
