@@ -128,6 +128,8 @@ p {
   margin: 0rem;
   box-sizing: border-box;
   display: inline-block;
+  margin: 0 -0.25rem;
+  padding: 0;
 }
 
 #filled {
@@ -183,6 +185,7 @@ p {
 
 #end {
   float: right;
+  padding-right: 0.8rem;
 }
 
 .skip {

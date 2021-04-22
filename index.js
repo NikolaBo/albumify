@@ -27,10 +27,18 @@
   // Counter needed to keep track of current background image
   let currentBackground = 0;
 
+  // Current track time in seconds
+  let currentTime = 53;
+
+  // Total track length in seconds
+  let totalTime = 231;
+
   // Ids of the possible customization menu pages
   const pageIds = [
     "song",
     "artist",
+    "length",
+    "current",
     "toggle-play",
     "next-bg",
     "upload-bg"
@@ -40,12 +48,14 @@
   const generators = [
     () => generateInput(pageIds[0], "Song Name:", updateText),
     () => generateInput(pageIds[1], "Artist Name:", updateText),
+    () => generateInput(pageIds[2], "Length (Seconds):", setLength),
+    () => generateInput(pageIds[3], "Current (Seconds):", setTime),
     () => generateButton(() => toggleSelector("#play-controls"), "Toggle Play Controls"),
     () => generateButton(nextBackground, "Next Background"),
     () => generateFileInput("Upload Background", setCustomImage)
   ];
 
-  // Default backgrouns
+  // Default backgrounds
   const backgroundImages = [
     "img/background1.jpeg",   // Photo by Kevin Ianeselli on Unsplash
     "img/background2.jpeg",   // Photo by Joshua Fuller on Unsplash
@@ -141,6 +151,9 @@
     menuPage.appendChild(label);
   }
 
+  /**
+   *
+   */
   function setCustomImage() {
     if (this.files && this.files[0]) {
       const src = URL.createObjectURL(this.files[0]); // set src to blob url
@@ -160,6 +173,57 @@
     button.textContent = text;
     button.addEventListener("click", buttonCallback);
     menuPage.appendChild(button);
+  }
+
+  /**
+   * Callback to update length
+   * @param {event} event - information about the input event
+   */
+  function setLength (event) {
+    let seconds = parseInt(event.target.value);
+    if (seconds > currentTime && seconds < 3600) {
+      totalTime = seconds;
+    }
+    updateTimeDisplay();
+  }
+
+  /**
+   * Callback to update time
+   * @param {event} event - information about the input event
+   */
+  function setTime (event) {
+    let seconds = parseInt(event.target.value);
+    if (seconds <= totalTime && seconds < 3600) {
+      currentTime = seconds;
+    }
+    updateTimeDisplay();
+  }
+
+  /**
+   * Updates the seeking bar and timestamps visually
+   */
+  function updateTimeDisplay() {
+    id("start").textContent = formatDisplayTime(currentTime);
+    id("end").textContent = formatDisplayTime(totalTime);
+    const filledPercent = (currentTime / totalTime * 100);
+    const emptyPercent = 100 - filledPercent;
+    console.log(filledPercent);
+    console.log(emptyPercent);
+    id("filled").style.width = `${Math.abs(filledPercent)}%`;
+    id("empty").style.width = `${Math.abs(emptyPercent)}%`;
+  }
+
+  /**
+   * Format pretty time
+   * @param {number} totalSeconds - seconds to format as a time
+   * @returns {string} time as MM:SS
+   */
+  function formatDisplayTime(totalSeconds) {
+    const minutes = Math.floor((totalSeconds / 60));
+    let seconds = Math.floor((totalSeconds % 60));
+    if (seconds === 0) seconds = "00";
+    if (seconds > 0 && seconds < 10) seconds = "0" + seconds;
+    return `${minutes}:${seconds}`;
   }
 
   /**
